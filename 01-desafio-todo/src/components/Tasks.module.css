@@ -1,0 +1,85 @@
+.addTask {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  height: 3.375rem;
+  width: 100%;
+  margin-top: -1.6875rem;
+}
+
+.addTask input {
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-700);
+  border-radius: 8px;
+  width: 39.875rem;
+
+  padding: 1rem;
+  line-height: 1.4;
+  font-size: 1rem;
+  font-weight: 400;
+  color: var(--gray-300);
+}
+
+.addTask button {
+  background-color: var(--blue-dark);
+  padding: 1rem;
+  border: 0;
+  border-radius: 8px;
+  color: var(--gray-100);
+  font-size: 0.875rem;
+  line-height: 1.25;
+  cursor: pointer;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.addTask button:hover {
+  opacity: 0.9;
+}
+
+.tasks {
+  margin-top: 91px;
+  width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.tasksInfo {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.tasksInfo div {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue);
+  line-height: 1rem;
+  font-size: 0.875rem;
+}
+
+.emptyList {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 4rem 1.5rem;
+  line-height: 1.375rem;
+
+  border-top: 1px solid var(--gray-400);
+  border-radius: 8px;
+}
+
+.emptyList img {
+  margin-bottom: 1rem;
+}
+
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}

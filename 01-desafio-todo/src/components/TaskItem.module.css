@@ -1,0 +1,85 @@
+.taskItem {
+  background-color: var(--gray-500);
+  border: 1px solid var(--gray-400);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.taskItem {
+  display: flex;
+  gap: 12px;
+}
+
+.checkmarkContainer {
+  flex: 1;
+  position: relative;
+  padding-left: 35px;
+  cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.checkmarkContainer input {
+  appearance: none;
+  cursor: pointer;
+}
+
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 1.25rem;
+  width: 1.25rem;
+  background-color: transparent;
+  border: 1px solid var(--blue);
+  border-radius: 50px;
+}
+
+.checkmarkContainer input:checked~.checkmark {
+  background-color: var(--purple-dark);
+  border-color: var(--purple-dark);
+}
+
+/* Create the checkmark indicator */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show checkmark when checked */
+.checkmarkContainer input:checked~.checkmark::after {
+  display: block;
+}
+
+/* Style checkmark */
+.checkmarkContainer .checkmark::after {
+  left: 7px;
+  top: 4px;
+  width: 3px;
+  height: 7px;
+  border: solid var(--gray-100);
+  border-width: 0 2px 2px 0;
+  -webkit-transform: rotate(45deg);
+  -ms-transform: rotate(45deg);
+  transform: rotate(45deg);
+}
+
+.taskText {
+  flex: 1;
+}
+
+input[type="checkbox"]:not(checked)+.taskText {
+  color: var(--gray-100);
+}
+
+input[type="checkbox"]:checked+.taskText {
+  color: var(--gray-300);
+  text-decoration: line-through;
+}
+
+.trashIcon {
+  cursor: pointer;
+}
