@@ -98,10 +98,9 @@ export function CartProvider({ children }: CartProviderProps): JSX.Element {
 
       const productIndex = cart.findIndex(product => product.id === productId);
 
-      setCart(state => {
-        state[productIndex].amount = amount;
-        return state;
-      });
+      const cartCopy = [...cart];
+      cartCopy[productIndex].amount = amount;
+      setCart(cartCopy);
     } catch {
       toast.error('Erro na alteração de quantidade do produto');
     }
