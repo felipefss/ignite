@@ -1,5 +1,9 @@
+import { Intro } from "./components/Intro";
+
 export function Main() {
   return (
-    <div>Main</div>
+    <div>
+      <Intro />
+    </div>
   );
 }
