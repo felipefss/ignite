@@ -15,7 +15,7 @@ const BaseButton = styled.button<CartButtonProps>`
   cursor: pointer;
 `;
 
-export const IconButton = styled(BaseButton)`
+export const LocationButton = styled(BaseButton)`
   padding: 0.75rem;
   gap: 0.25rem;
 
@@ -61,3 +61,5 @@ export const CartButton = styled(BaseButton)`
     border-radius: 1000px;
   }
 `;
+
+export const IconButton = styled(BaseButton)``;

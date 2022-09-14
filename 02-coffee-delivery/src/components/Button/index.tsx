@@ -12,7 +12,7 @@ const buttonsMap = {
   icon: Styled.IconButton,
   small: '',
   cart: Styled.CartButton,
-  location: ''
+  location: Styled.LocationButton
 };
 
 export function Button({ children, variant = 'button', cartAmount }: ButtonProps) {

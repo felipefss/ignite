@@ -61,5 +61,3 @@ export const Icon = styled.div<IconProps>`
   height: 2rem;
   padding: 0.5rem;
 `;
-
-export const ImageContainer = styled.img``;
