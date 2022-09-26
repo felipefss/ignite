@@ -20,7 +20,7 @@ export function Card() {
         <Styled.Purchase>
           <QuantityCounter />
           <Button variant='icon'>
-            <ShoppingCart weight='fill' />
+            <ShoppingCart weight='fill' size={22} />
           </Button>
         </Styled.Purchase>
       </Styled.Footer>

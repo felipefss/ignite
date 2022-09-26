@@ -62,4 +62,13 @@ export const CartButton = styled(BaseButton)`
   }
 `;
 
-export const IconButton = styled(BaseButton)``;
+export const IconButton = styled(BaseButton)`
+  padding: 0.5rem;
+
+  background-color: ${props => props.theme["purple-dark"]};
+  color: ${props => props.theme.card};
+
+  &:hover {
+    background-color: ${props => props.theme.purple};
+  }
+`;
