@@ -9,6 +9,13 @@ export function CoffeeList() {
 
       <Styled.Cards>
         <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
+        <Card />
       </Styled.Cards>
     </Styled.ListContainer>
   );
