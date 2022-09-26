@@ -6,7 +6,9 @@ import * as Styled from './styles';
 export function Header() {
   return (
     <Styled.HeaderContainer>
-      <img src={Logo} alt="Copo take-out de café escrito Coffee Delivery ao lado" />
+      <a href="/">
+        <img src={Logo} alt="Copo take-out de café escrito Coffee Delivery ao lado" />
+      </a>
       <Styled.ActionButtons>
         <Button variant='location'>
           <MapPin weight='fill' size={22} />
