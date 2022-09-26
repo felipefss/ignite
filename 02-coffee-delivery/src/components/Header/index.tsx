@@ -8,7 +8,7 @@ export function Header() {
     <Styled.HeaderContainer>
       <img src={Logo} alt="Copo take-out de café escrito Coffee Delivery ao lado" />
       <Styled.ActionButtons>
-        <Button variant='icon'>
+        <Button variant='location'>
           <MapPin weight='fill' size={22} />
           <span>Porto Alegre, RS</span>
         </Button>

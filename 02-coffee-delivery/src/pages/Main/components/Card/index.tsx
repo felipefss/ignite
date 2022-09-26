@@ -3,6 +3,7 @@ import * as Styled from './styles';
 import Expresso from '../../../../assets/Expresso.svg';
 import { Button } from '../../../../components/Button';
 import { ShoppingCart } from 'phosphor-react';
+import { QuantityCounter } from '../../../../components/QuantityCounter';
 
 export function Card() {
   return (
@@ -17,12 +18,7 @@ export function Card() {
         <Styled.Price>R$ <span>9,90</span></Styled.Price>
 
         <Styled.Purchase>
-          <div>
-            <div>-</div>
-            {/* <input type="number" /> */}
-            2
-            <div>+</div>
-          </div>
+          <QuantityCounter />
           <Button variant='icon'>
             <ShoppingCart weight='fill' />
           </Button>
