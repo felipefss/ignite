@@ -1,32 +1,45 @@
 import { MapPinLine } from "phosphor-react";
 
+import * as Styled from './styles';
+
 export function DeliveryDetails() {
   return (
-    <section>
-      <div>
-        <MapPinLine />
+    <Styled.DeliveryContainer>
+      <Styled.Header>
+        <MapPinLine size={22} />
 
-        <div>
+        <Styled.Title>
           <h3>Endereço de Entrega</h3>
           <p>Informe o endereço onde deseja receber seu pedido</p>
-        </div>
-      </div>
+        </Styled.Title>
+      </Styled.Header>
 
-      <div>
-        <input type="text" placeholder="CEP" />
-        <input type="text" placeholder="Rua" />
+      <Styled.Form>
+        <Styled.Input
+          type="text"
+          placeholder="CEP"
+          maxLength={9}
+          minLength={9}
+          size={9}
+          width={12.75}
+        />
+        <Styled.Input type="text" placeholder="Rua" />
 
-        <div>
-          <input type="text" placeholder="Número" />
-          <input type="text" placeholder="Complemento" />
-        </div>
+        <Styled.Info>
+          <Styled.Input type="text" placeholder="Número" />
 
-        <div>
-          <input type="text" placeholder="Bairro" />
-          <input type="text" placeholder="Cidade" />
-          <input type="text" placeholder="UF" maxLength={2} minLength={2} />
-        </div>
-      </div>
-    </section>
+          <Styled.InputGroup>
+            <Styled.ComplementoInput type="text" placeholder="Complemento" />
+            <Styled.OptionalText>Opcional</Styled.OptionalText>
+          </Styled.InputGroup>
+        </Styled.Info>
+
+        <Styled.Info>
+          <Styled.Input type="text" placeholder="Bairro" />
+          <Styled.Input type="text" placeholder="Cidade" />
+          <Styled.Input type="text" placeholder="UF" maxLength={2} minLength={2} size={2} />
+        </Styled.Info>
+      </Styled.Form>
+    </Styled.DeliveryContainer>
   );
 }
