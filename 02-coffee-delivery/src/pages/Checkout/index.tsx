@@ -1,4 +1,5 @@
 import { DeliveryDetails } from "./components/DeliveryDetails";
+import { PaymentType } from "./components/PaymentType";
 
 import * as Styled from './styles';
 
@@ -8,6 +9,7 @@ export function Checkout() {
       <section>
         <Styled.Title>Complete seu pedido</Styled.Title>
         <DeliveryDetails />
+        <PaymentType />
       </section>
 
       <section>

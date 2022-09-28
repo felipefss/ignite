@@ -4,6 +4,7 @@ export const DeliveryContainer = styled.div`
   padding: 2.5rem;
   background-color: ${props => props.theme.card};
   border-radius: 6px;
+  margin-bottom: 0.75rem;
 `;
 
 export const Header = styled.div`
