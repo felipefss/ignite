@@ -1,4 +1,5 @@
-import { Bank, CreditCard, CurrencyDollar, Money } from "phosphor-react";
+import { CurrencyDollar } from "phosphor-react";
+import { PaymentMethod } from "../PaymentMethod";
 
 import * as Styled from './styles';
 
@@ -15,23 +16,9 @@ export function PaymentType() {
       </Styled.Header>
 
       <Styled.PaymentMethods>
-        <Styled.Method>
-          <input type="radio" name="paymentType" />
-          <CreditCard size={16} />
-          <span>Cartão de Crédito</span>
-        </Styled.Method>
-
-        <Styled.Method>
-          <input type="radio" name="paymentType" />
-          <Bank size={16} />
-          <span>Cartão de Débito</span>
-        </Styled.Method>
-
-        <Styled.Method>
-          <input type="radio" name="paymentType" />
-          <Money size={16} />
-          <span>Dinheiro</span>
-        </Styled.Method>
+        <PaymentMethod label="Cartão de Crédito" type="credit" />
+        <PaymentMethod label="Cartão de Débito" type="debit" />
+        <PaymentMethod label="Dinheiro" type="cash" />
       </Styled.PaymentMethods>
     </Styled.PaymentContainer>
   );
