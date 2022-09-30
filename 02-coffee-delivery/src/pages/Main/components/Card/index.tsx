@@ -1,6 +1,5 @@
 import * as Styled from './styles';
 
-import Expresso from '../../../../assets/Expresso.svg';
 import { Button } from '../../../../components/Button';
 import { ShoppingCart } from 'phosphor-react';
 import { QuantityCounter } from '../../../../components/QuantityCounter';
@@ -8,7 +7,7 @@ import { QuantityCounter } from '../../../../components/QuantityCounter';
 export function Card() {
   return (
     <Styled.CardContainer>
-      <Styled.Image src={Expresso} alt="Xícara de café vista de cima" />
+      <Styled.Image src='/assets/Expresso.svg' alt="Xícara de café vista de cima" />
       <Styled.Tag>Tradicional</Styled.Tag>
 
       <Styled.Name>Expresso Tradicional</Styled.Name>

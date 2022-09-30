@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import Background from '../../../../assets/Background.svg';
-
 interface IconProps {
   bgColor: 'yellow' | 'yellow-dark' | 'text' | 'purple';
 }
@@ -12,7 +10,7 @@ export const IntroContainer = styled.section`
   gap: 3.5rem;
   width: 100%;
   padding: 5.875rem 10rem;
-  background: url(${Background});
+  background: url('/assets/Background.svg');
 `;
 
 export const Title = styled.div`

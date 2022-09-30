@@ -72,3 +72,20 @@ export const IconButton = styled(BaseButton)`
     background-color: ${props => props.theme.purple};
   }
 `;
+
+export const SmallButton = styled(BaseButton)`
+  background-color: ${props => props.theme.button};
+  padding: 0 0.5rem;
+  gap: 0.25rem;
+  color: ${props => props.theme.purple};
+
+  span {
+    color: ${props => props.theme.text};
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background-color: ${props => props.theme.hover};
+  }
+`;

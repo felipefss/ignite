@@ -1,4 +1,5 @@
 import { DeliveryDetails } from "./components/DeliveryDetails";
+import { OrderDetails } from "./components/OrderDetails";
 import { PaymentType } from "./components/PaymentType";
 
 import * as Styled from './styles';
@@ -14,6 +15,7 @@ export function Checkout() {
 
       <section>
         <Styled.Title>Cafés selecionados</Styled.Title>
+        <OrderDetails />
       </section>
     </Styled.CheckoutContainer>
   );

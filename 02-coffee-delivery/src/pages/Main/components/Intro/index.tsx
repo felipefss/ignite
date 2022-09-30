@@ -1,5 +1,4 @@
 import { Coffee, Package, ShoppingCart, Timer } from 'phosphor-react';
-import CoffeCupImg from '../../../../assets/Coffee_Cup_Beans.svg';
 import * as Styled from './styles';
 
 export function Intro() {
@@ -42,7 +41,7 @@ export function Intro() {
         </Styled.Features>
       </div>
 
-      <img src={CoffeCupImg} alt="Copo de café takeaway com amostras de grãos inteiros e moídos ao redor" />
+      <img src={'/assets/Coffee_Cup_Beans.svg'} alt="Copo de café takeaway com amostras de grãos inteiros e moídos ao redor" />
     </Styled.IntroContainer>
   );
 }

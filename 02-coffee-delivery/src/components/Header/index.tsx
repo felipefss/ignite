@@ -1,5 +1,4 @@
 import { MapPin, ShoppingCart } from 'phosphor-react';
-import Logo from '../../assets/Logo.svg';
 import { Button } from '../Button';
 import * as Styled from './styles';
 
@@ -7,7 +6,7 @@ export function Header() {
   return (
     <Styled.HeaderContainer>
       <a href="/">
-        <img src={Logo} alt="Copo take-out de café escrito Coffee Delivery ao lado" />
+        <img src='assets/Logo.svg' alt="Copo take-out de café escrito Coffee Delivery ao lado" />
       </a>
       <Styled.ActionButtons>
         <Button variant='location'>
