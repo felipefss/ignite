@@ -36,7 +36,7 @@ export function DeliveryDetails() {
 
         <Styled.Info>
           <Styled.Input type="text" placeholder="Bairro" />
-          <Styled.Input type="text" placeholder="Cidade" />
+          <Styled.GrownInput type="text" placeholder="Cidade" />
           <Styled.Input type="text" placeholder="UF" maxLength={2} minLength={2} size={2} />
         </Styled.Info>
       </Styled.Form>

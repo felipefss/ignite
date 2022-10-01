@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const DeliveryContainer = styled.div`
   padding: 2.5rem;
   background-color: ${props => props.theme.card};
+  width: 40rem;
   border-radius: 6px;
   margin-bottom: 0.75rem;
 `;
@@ -62,12 +63,17 @@ export const Input = styled.input`
 `;
 
 export const InputGroup = styled.div`
-  &:has(input:not(:placeholder-shown)) {
-    width: 100%;
-  }
+  display: flex;
+  flex: 1;
 `;
 
-export const ComplementoInput = styled(Input)`
+export const GrownInput = styled(Input)`
+  flex: 1;
+`;
+
+export const ComplementoInput = styled(GrownInput)`
+  flex: 1;
+
   &:placeholder-shown {
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
