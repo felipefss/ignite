@@ -4,6 +4,7 @@ export const MethodContainer = styled.label`
   display: flex;
   align-items: center;
   gap: 0.75rem;
+  flex: 1;
 
   background-color: ${props => props.theme.button};
   color: ${props => props.theme.purple};

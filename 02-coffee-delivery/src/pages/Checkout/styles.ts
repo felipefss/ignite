@@ -2,8 +2,9 @@ import styled from "styled-components";
 
 export const CheckoutContainer = styled.div`
   display: flex;
+  justify-content: center;
   gap: 2rem;
-  padding: 2.5rem 10rem;
+  padding: 2.5rem 0;
 `;
 
 export const Title = styled.h2`
