@@ -23,7 +23,7 @@ export function CoffeeSelected({ name, imgSrc, price }: CoffeeSelectedProps) {
           <Styled.Actions>
             <QuantityCounter />
 
-            <Button>
+            <Button variant='small'>
               <Trash size={16} />
               <span>REMOVER</span>
             </Button>

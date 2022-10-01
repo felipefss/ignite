@@ -15,18 +15,47 @@ const BaseButton = styled.button<CartButtonProps>`
   cursor: pointer;
 `;
 
-export const LocationButton = styled(BaseButton)`
-  padding: 0.75rem;
+export const DefaultButton = styled(BaseButton)`
+  padding: 0.75rem 0.5rem;
+
+  background-color: ${props => props.theme.yellow};
+  color: ${props => props.theme.white};
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 1.6;
+  text-transform: uppercase;
+  font-stretch: 100%;
+
+  &:hover {
+    background-color: ${props => props.theme["yellow-dark"]};
+  }
+`;
+
+export const IconButton = styled(BaseButton)`
+  padding: 0.5rem;
+
+  background-color: ${props => props.theme["purple-dark"]};
+  color: ${props => props.theme.card};
+
+  &:hover {
+    background-color: ${props => props.theme.purple};
+  }
+`;
+
+export const SmallButton = styled(BaseButton)`
+  background-color: ${props => props.theme.button};
+  padding: 0 0.5rem;
   gap: 0.25rem;
-
-  background-color: ${props => props.theme["purple-light"]};
-  color: ${props => props.theme["purple-dark"]};
-
-  cursor: auto;
+  color: ${props => props.theme.purple};
 
   span {
-    font-size: 0.875rem;
-    line-height: 1.3;
+    color: ${props => props.theme.text};
+    font-size: 0.75rem;
+    text-transform: uppercase;
+  }
+
+  &:hover {
+    background-color: ${props => props.theme.hover};
   }
 `;
 
@@ -62,30 +91,17 @@ export const CartButton = styled(BaseButton)`
   }
 `;
 
-export const IconButton = styled(BaseButton)`
-  padding: 0.5rem;
-
-  background-color: ${props => props.theme["purple-dark"]};
-  color: ${props => props.theme.card};
-
-  &:hover {
-    background-color: ${props => props.theme.purple};
-  }
-`;
-
-export const SmallButton = styled(BaseButton)`
-  background-color: ${props => props.theme.button};
-  padding: 0 0.5rem;
+export const LocationButton = styled(BaseButton)`
+  padding: 0.75rem;
   gap: 0.25rem;
-  color: ${props => props.theme.purple};
+
+  background-color: ${props => props.theme["purple-light"]};
+  color: ${props => props.theme["purple-dark"]};
+
+  cursor: auto;
 
   span {
-    color: ${props => props.theme.text};
-    font-size: 0.75rem;
-    text-transform: uppercase;
-  }
-
-  &:hover {
-    background-color: ${props => props.theme.hover};
+    font-size: 0.875rem;
+    line-height: 1.3;
   }
 `;

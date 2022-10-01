@@ -8,9 +8,9 @@ interface ButtonProps {
 }
 
 const buttonsMap = {
-  button: Styled.SmallButton,
+  button: Styled.DefaultButton,
   icon: Styled.IconButton,
-  small: '',
+  small: Styled.SmallButton,
   cart: Styled.CartButton,
   location: Styled.LocationButton
 };
