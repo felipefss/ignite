@@ -41,7 +41,7 @@ export function Intro() {
         </Styled.Features>
       </div>
 
-      <img src={'/assets/Coffee_Cup_Beans.svg'} alt="Copo de café takeaway com amostras de grãos inteiros e moídos ao redor" />
+      <img src='/assets/Coffee_Cup_Beans.svg' alt="Copo de café takeaway com amostras de grãos inteiros e moídos ao redor" />
     </Styled.IntroContainer>
   );
 }
