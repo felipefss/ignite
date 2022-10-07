@@ -1,12 +1,23 @@
 import { Minus, Plus } from 'phosphor-react';
 import * as Styled from './styles';
 
-export function QuantityCounter() {
+interface QuantityCounterProps {
+  quantity: number;
+  onChange: (step: number) => void;
+}
+
+export function QuantityCounter({ quantity, onChange }: QuantityCounterProps) {
   return (
     <Styled.CounterContainer>
-      <Styled.CounterButton><Minus size={14} /></Styled.CounterButton>
-      <Styled.Count>1</Styled.Count>
-      <Styled.CounterButton><Plus size={14} /></Styled.CounterButton>
+      <Styled.CounterButton onClick={() => onChange(-1)}>
+        <Minus size={14} />
+      </Styled.CounterButton>
+
+      <Styled.Count>{quantity}</Styled.Count>
+
+      <Styled.CounterButton onClick={() => onChange(1)}>
+        <Plus size={14} />
+      </Styled.CounterButton>
     </Styled.CounterContainer>
   );
 }
