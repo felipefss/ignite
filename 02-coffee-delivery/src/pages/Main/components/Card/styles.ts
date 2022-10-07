@@ -17,6 +17,11 @@ export const Image = styled.img`
   margin-bottom: 0.75rem;
 `;
 
+export const Tags = styled.div`
+  display: flex;
+  gap: 0.25rem;
+`;
+
 export const Tag = styled.span`
   background-color: ${props => props.theme["yellow-light"]};
   color: ${props => props.theme["yellow-dark"]};
@@ -25,7 +30,7 @@ export const Tag = styled.span`
   margin-bottom: 1.25rem;
 
   font-size: 0.625rem;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.3;
   text-transform: uppercase;
 `;

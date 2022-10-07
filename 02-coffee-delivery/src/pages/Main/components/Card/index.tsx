@@ -1,20 +1,31 @@
-import * as Styled from './styles';
+import { ShoppingCart } from 'phosphor-react';
 
 import { Button } from '../../../../components/Button';
-import { ShoppingCart } from 'phosphor-react';
 import { QuantityCounter } from '../../../../components/QuantityCounter';
 
-export function Card() {
+import { Coffee } from '../../../../contexts/CartContext';
+import { formatToReais } from '../../../../utils/format';
+
+import * as Styled from './styles';
+
+interface CardProps extends Omit<Coffee, 'id'> { }
+
+export function Card({ name, description, price, image, tags }: CardProps) {
+  const [currencySign, currencyValue] = formatToReais(price).split(/\s/);
+
   return (
     <Styled.CardContainer>
-      <Styled.Image src='/assets/Expresso.svg' alt="Xícara de café vista de cima" />
-      <Styled.Tag>Tradicional</Styled.Tag>
+      <Styled.Image src={image} alt="Xícara de café vista de cima" />
 
-      <Styled.Name>Expresso Tradicional</Styled.Name>
-      <Styled.Description>O tradicional café feito com água quente e grãos moídos</Styled.Description>
+      <Styled.Tags>
+        {tags.map(tag => <Styled.Tag>{tag}</Styled.Tag>)}
+      </Styled.Tags>
+
+      <Styled.Name>{name}</Styled.Name>
+      <Styled.Description>{description}</Styled.Description>
 
       <Styled.Footer>
-        <Styled.Price>R$ <span>9,90</span></Styled.Price>
+        <Styled.Price>{currencySign} <span>{currencyValue}</span></Styled.Price>
 
         <Styled.Purchase>
           <QuantityCounter />
