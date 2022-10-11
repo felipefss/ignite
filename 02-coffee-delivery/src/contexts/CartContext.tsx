@@ -15,6 +15,8 @@ interface CartProviderProps {
 interface ICartContext {
   cart: Coffee[];
   addToCart: (coffee: Coffee) => void;
+  updateCartItem: (id: number, quantity: number) => void;
+  removeCartItem: (id: number) => void;
 }
 
 export const CartContext = createContext({} as ICartContext);
@@ -23,13 +25,37 @@ export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Coffee[]>([]);
 
   function addToCart(coffee: Coffee) {
-    setCart(prev => [...prev, coffee]);
+    if (cart.find(item => item.id === coffee.id)) {
+      updateCartItem(coffee.id, coffee.quantity);
+    } else {
+      setCart(prev => [...prev, coffee]);
+    }
+  }
+
+  function updateCartItem(id: number, quantity: number) {
+    setCart(prev => {
+      return prev.map(item => {
+        if (item.id === id) {
+          return {
+            ...item,
+            quantity: item.quantity + quantity
+          };
+        }
+        return item;
+      });
+    })
+  }
+
+  function removeCartItem(id: number) {
+    setCart(prev => prev.filter(item => item.id !== id));
   }
 
   return (
     <CartContext.Provider value={{
       cart,
-      addToCart
+      addToCart,
+      updateCartItem,
+      removeCartItem
     }}>
       {children}
     </CartContext.Provider>
