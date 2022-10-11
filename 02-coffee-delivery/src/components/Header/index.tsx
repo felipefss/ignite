@@ -1,12 +1,24 @@
 import { MapPin, ShoppingCart } from 'phosphor-react';
-import { useContext } from 'react';
+import { ReactNode, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { Button } from '../Button';
 import * as Styled from './styles';
 
+interface ConditionalLinkProps {
+  children: ReactNode;
+}
+
 export function Header() {
   const { cart } = useContext(CartContext);
+
+  const ConditionalLink = ({ children }: ConditionalLinkProps) => {
+    if (cart.length) {
+      return <Link to='/checkout'>{children}</Link>;
+    }
+
+    return <>{children}</>
+  };
 
   return (
     <Styled.HeaderContainer>
@@ -18,11 +30,11 @@ export function Header() {
           <MapPin weight='fill' size={22} />
           <span>Porto Alegre, RS</span>
         </Button>
-        <Link to='/checkout'>
+        <ConditionalLink>
           <Button variant='cart' cartAmount={cart.length}>
             <ShoppingCart weight='fill' size={22} />
           </Button>
-        </Link>
+        </ConditionalLink>
       </Styled.ActionButtons>
     </Styled.HeaderContainer>
   );
