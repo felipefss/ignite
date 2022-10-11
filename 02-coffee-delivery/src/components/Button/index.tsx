@@ -1,7 +1,7 @@
-import { ReactNode } from 'react';
+import { ButtonHTMLAttributes, HTMLAttributes, ReactNode } from 'react';
 import * as Styled from './styles';
 
-interface ButtonProps {
+interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;
   variant?: 'button' | 'icon' | 'small' | 'cart' | 'location';
   cartAmount?: number;
@@ -15,11 +15,11 @@ const buttonsMap = {
   location: Styled.LocationButton
 };
 
-export function Button({ children, variant = 'button', cartAmount }: ButtonProps) {
+export function Button({ children, variant = 'button', cartAmount, ...props }: ButtonProps) {
   const ButtonComponent = buttonsMap[variant];
 
   return (
-    <ButtonComponent cartAmount={cartAmount}>
+    <ButtonComponent cartAmount={cartAmount} {...props}>
       {children}
     </ButtonComponent>
   );

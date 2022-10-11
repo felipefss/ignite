@@ -1,18 +1,18 @@
 import { ShoppingCart } from 'phosphor-react';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import { Button } from '../../../../components/Button';
 import { QuantityCounter } from '../../../../components/QuantityCounter';
+import { CartContext } from '../../../../contexts/CartContext';
 
-import { Coffee } from '../../../../contexts/CartContext';
 import { formatToReais } from '../../../../utils/format';
+import { ICoffee } from '../CoffeeList';
 
 import * as Styled from './styles';
 
-interface CardProps extends Omit<Coffee, 'id'> { }
-
-export function Card({ name, description, price, image, tags }: CardProps) {
+export function Card({ id, name, description, price, image, tags }: ICoffee) {
   const [quantity, setQuantity] = useState(1);
+  const { addToCart } = useContext(CartContext);
 
   const [currencySign, currencyValue] = formatToReais(price).split(/\s/);
 
@@ -25,12 +25,25 @@ export function Card({ name, description, price, image, tags }: CardProps) {
     setQuantity(prev => prev + step);
   }
 
+  function handleAddToCart() {
+    addToCart({
+      id,
+      name,
+      price,
+      image,
+      quantity
+    });
+
+    // Reset quantity
+    setQuantity(1);
+  }
+
   return (
     <Styled.CardContainer>
       <Styled.Image src={image} alt="Xícara de café vista de cima" />
 
       <Styled.Tags>
-        {tags.map(tag => <Styled.Tag>{tag}</Styled.Tag>)}
+        {tags.map(tag => <Styled.Tag key={tag}>{tag}</Styled.Tag>)}
       </Styled.Tags>
 
       <Styled.Name>{name}</Styled.Name>
@@ -44,7 +57,7 @@ export function Card({ name, description, price, image, tags }: CardProps) {
             quantity={quantity}
             onChange={updateQuantity}
           />
-          <Button variant='icon'>
+          <Button variant='icon' onClick={handleAddToCart}>
             <ShoppingCart weight='fill' size={22} />
           </Button>
         </Styled.Purchase>

@@ -1,15 +1,11 @@
-import axios from "axios";
-import { createContext, ReactNode, useEffect, useState } from "react";
+import { createContext, ReactNode, useState } from "react";
 
-const BASE_URL = 'http://localhost:3000/coffees';
-
-export interface Coffee {
+interface Coffee {
   id: number;
   name: string;
-  description: string;
   price: number;
   image: string;
-  tags: string[];
+  quantity: number;
 }
 
 interface CartProviderProps {
@@ -17,23 +13,23 @@ interface CartProviderProps {
 }
 
 interface ICartContext {
-  coffees: Coffee[];
+  cart: Coffee[];
+  addToCart: (coffee: Coffee) => void;
 }
 
 export const CartContext = createContext({} as ICartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [coffees, setCoffees] = useState<Coffee[]>([]);
+  const [cart, setCart] = useState<Coffee[]>([]);
 
-  useEffect(() => {
-    axios.get<Coffee[]>(BASE_URL).then(({ data }) => {
-      setCoffees(data);
-    });
-  }, []);
+  function addToCart(coffee: Coffee) {
+    setCart(prev => [...prev, coffee]);
+  }
 
   return (
     <CartContext.Provider value={{
-      coffees
+      cart,
+      addToCart
     }}>
       {children}
     </CartContext.Provider>
