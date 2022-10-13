@@ -12,12 +12,24 @@ interface CartProviderProps {
   children: ReactNode;
 }
 
+export interface DeliveryAddress {
+  cep: string;
+  rua: string;
+  numero: string;
+  complemento?: string;
+  bairro: string;
+  cidade: string;
+  uf: string;
+}
+
 interface ICartContext {
   cart: Coffee[];
+  deliveryDetails: DeliveryAddress;
   addToCart: (coffee: Coffee) => void;
   updateCartItem: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;
   updatePaymentType: (value: PaymentType) => void;
+  updateDeliveryAddress: (key: keyof DeliveryAddress, value: string) => void;
 }
 
 type PaymentType = 'credit' | 'debit' | 'cash';
@@ -27,6 +39,15 @@ export const CartContext = createContext({} as ICartContext);
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Coffee[]>([]);
   const [paymentType, setPamentType] = useState<PaymentType | null>(null);
+  const [deliveryDetails, setDeliveryDetails] = useState({
+    cep: '',
+    rua: '',
+    numero: '',
+    complemento: '',
+    bairro: '',
+    cidade: '',
+    uf: ''
+  });
 
   function addToCart(coffee: Coffee) {
     if (cart.find(item => item.id === coffee.id)) {
@@ -58,13 +79,19 @@ export function CartProvider({ children }: CartProviderProps) {
     setPamentType(value);
   }
 
+  function updateDeliveryAddress(key: keyof DeliveryAddress, value: string) {
+    setDeliveryDetails(prev => ({ ...prev, [key]: value }));
+  }
+
   return (
     <CartContext.Provider value={{
       cart,
+      deliveryDetails,
       addToCart,
       updateCartItem,
       removeCartItem,
-      updatePaymentType
+      updatePaymentType,
+      updateDeliveryAddress
     }}>
       {children}
     </CartContext.Provider>
