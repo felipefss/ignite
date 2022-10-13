@@ -1,9 +1,18 @@
+import { useContext } from "react";
 import { CurrencyDollar } from "phosphor-react";
-import { PaymentMethod } from "../PaymentMethod";
+
+import { CartContext } from "../../../../contexts/CartContext";
+import { PaymentMethod, TypeOfPayment } from "../PaymentMethod";
 
 import * as Styled from './styles';
 
 export function PaymentType() {
+  const { updatePaymentType } = useContext(CartContext);
+
+  function onSelectPaymentMethod(value: TypeOfPayment) {
+    updatePaymentType(value);
+  }
+
   return (
     <Styled.PaymentContainer>
       <Styled.Header>
@@ -16,9 +25,9 @@ export function PaymentType() {
       </Styled.Header>
 
       <Styled.PaymentMethods>
-        <PaymentMethod label="Cartão de Crédito" type="credit" />
-        <PaymentMethod label="Cartão de Débito" type="debit" />
-        <PaymentMethod label="Dinheiro" type="cash" />
+        <PaymentMethod label="Cartão de Crédito" type="credit" onSelect={onSelectPaymentMethod} />
+        <PaymentMethod label="Cartão de Débito" type="debit" onSelect={onSelectPaymentMethod} />
+        <PaymentMethod label="Dinheiro" type="cash" onSelect={onSelectPaymentMethod} />
       </Styled.PaymentMethods>
     </Styled.PaymentContainer>
   );

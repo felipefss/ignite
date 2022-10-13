@@ -17,12 +17,16 @@ interface ICartContext {
   addToCart: (coffee: Coffee) => void;
   updateCartItem: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;
+  updatePaymentType: (value: PaymentType) => void;
 }
+
+type PaymentType = 'credit' | 'debit' | 'cash';
 
 export const CartContext = createContext({} as ICartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Coffee[]>([]);
+  const [paymentType, setPamentType] = useState<PaymentType | null>(null);
 
   function addToCart(coffee: Coffee) {
     if (cart.find(item => item.id === coffee.id)) {
@@ -50,12 +54,17 @@ export function CartProvider({ children }: CartProviderProps) {
     setCart(prev => prev.filter(item => item.id !== id));
   }
 
+  function updatePaymentType(value: PaymentType) {
+    setPamentType(value);
+  }
+
   return (
     <CartContext.Provider value={{
       cart,
       addToCart,
       updateCartItem,
-      removeCartItem
+      removeCartItem,
+      updatePaymentType
     }}>
       {children}
     </CartContext.Provider>
