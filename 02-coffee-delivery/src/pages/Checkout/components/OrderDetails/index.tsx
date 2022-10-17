@@ -1,4 +1,5 @@
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 import { Button } from '../../../../components/Button';
 import { CoffeeSelected } from '../CoffeeSelected';
@@ -10,10 +11,20 @@ import * as Styled from './styles';
 const DELIVERY_RATE = 3.5;
 
 export function OrderDetails() {
-  const { cart } = useContext(CartContext);
+  const { cart, paymentType, deliveryDetails } = useContext(CartContext);
+  const navigate = useNavigate();
 
   const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const total = subTotal + DELIVERY_RATE;
+  const total = Math.round(subTotal + DELIVERY_RATE);
+
+  function handleSubmit() {
+    // API call passing the below values
+    console.log(total);
+    console.log(paymentType);
+    console.log(deliveryDetails);
+
+    navigate('/success');
+  }
 
   return (
     <Styled.OrderContainer>
@@ -48,7 +59,7 @@ export function OrderDetails() {
         </Styled.TotalLine>
       </Styled.Total>
 
-      <Button>Confirmar pedido</Button>
+      <Button onClick={handleSubmit}>Confirmar pedido</Button>
     </Styled.OrderContainer>
   );
 }
