@@ -1,8 +1,20 @@
 import { CurrencyDollar, MapPin, Timer } from "phosphor-react";
+import { useContext } from "react";
+import { CartContext } from "../../contexts/CartContext";
 
 import * as Styled from './styles';
 
+const paymentMapping = {
+  credit: 'Crédito',
+  debit: 'Débito',
+  cash: 'Dinheiro'
+};
+
 export function Success() {
+  const { deliveryDetails, paymentType } = useContext(CartContext);
+
+  const mappedPaymentType = paymentType ? paymentMapping[paymentType] : null;
+
   return (
     <Styled.SuccessContainer>
       <Styled.Title>Uhu! Pedido confirmado</Styled.Title>
@@ -18,8 +30,8 @@ export function Success() {
               </Styled.Icon>
 
               <div>
-                <span>Entrega em <strong>Rua João Daniel Martinelli, 102</strong></span>
-                <span>Farrapos - Porto Alegre, RS</span>
+                <span>Entrega em <strong>{deliveryDetails.rua}, {deliveryDetails.numero}</strong></span>
+                <span>{deliveryDetails.bairro} - {deliveryDetails.cidade}, {deliveryDetails.uf}</span>
               </div>
             </Styled.InfoDetail>
 
@@ -41,7 +53,7 @@ export function Success() {
 
               <div>
                 <span>Pagamento na entrega</span>
-                <strong>Cartão de Crédito</strong>
+                <strong>{mappedPaymentType}</strong>
               </div>
             </Styled.InfoDetail>
 

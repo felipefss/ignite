@@ -31,7 +31,18 @@ interface ICartContext {
   removeCartItem: (id: number) => void;
   updatePaymentType: (value: PaymentType) => void;
   updateDeliveryAddress: (key: keyof DeliveryAddress, value: string) => void;
+  clearCheckout: () => void;
 }
+
+const emptyDeliveryDetails = {
+  cep: '',
+  rua: '',
+  numero: '',
+  complemento: '',
+  bairro: '',
+  cidade: '',
+  uf: ''
+};
 
 type PaymentType = 'credit' | 'debit' | 'cash';
 
@@ -39,16 +50,8 @@ export const CartContext = createContext({} as ICartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Coffee[]>([]);
-  const [paymentType, setPamentType] = useState<PaymentType>();
-  const [deliveryDetails, setDeliveryDetails] = useState({
-    cep: '',
-    rua: '',
-    numero: '',
-    complemento: '',
-    bairro: '',
-    cidade: '',
-    uf: ''
-  });
+  const [paymentType, setPaymentType] = useState<PaymentType>();
+  const [deliveryDetails, setDeliveryDetails] = useState(emptyDeliveryDetails);
 
   function addToCart(coffee: Coffee) {
     if (cart.find(item => item.id === coffee.id)) {
@@ -77,11 +80,16 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function updatePaymentType(value: PaymentType) {
-    setPamentType(value);
+    setPaymentType(value);
   }
 
   function updateDeliveryAddress(key: keyof DeliveryAddress, value: string) {
     setDeliveryDetails(prev => ({ ...prev, [key]: value }));
+  }
+
+  function clearCheckout() {
+    setCart([]);
+    setDeliveryDetails(emptyDeliveryDetails);
   }
 
   return (
@@ -93,7 +101,8 @@ export function CartProvider({ children }: CartProviderProps) {
       updateCartItem,
       removeCartItem,
       updatePaymentType,
-      updateDeliveryAddress
+      updateDeliveryAddress,
+      clearCheckout
     }}>
       {children}
     </CartContext.Provider>

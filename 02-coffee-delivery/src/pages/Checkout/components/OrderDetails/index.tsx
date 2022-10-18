@@ -11,7 +11,7 @@ import * as Styled from './styles';
 const DELIVERY_RATE = 3.5;
 
 export function OrderDetails() {
-  const { cart, paymentType, deliveryDetails } = useContext(CartContext);
+  const { cart, paymentType, deliveryDetails, clearCheckout } = useContext(CartContext);
   const navigate = useNavigate();
 
   const subTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
