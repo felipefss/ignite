@@ -50,7 +50,15 @@ type PaymentType = 'credit' | 'debit' | 'cash';
 export const CartContext = createContext({} as ICartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
-  const [cart, setCart] = useState<Coffee[]>([]);
+  const [cart, setCart] = useState<Coffee[]>(() => {
+    const storedCart = localStorage.getItem('@coffee-delivery:cart-1.0.0');
+
+    if (storedCart) {
+      return JSON.parse(storedCart);
+    }
+
+    return [];
+  });
   const [paymentType, setPaymentType] = useState<PaymentType | null>(null);
   const [deliveryDetails, setDeliveryDetails] = useState(emptyDeliveryDetails);
 
@@ -58,13 +66,19 @@ export function CartProvider({ children }: CartProviderProps) {
     if (cart.find(item => item.id === coffee.id)) {
       updateCartItem(coffee.id, coffee.quantity);
     } else {
-      setCart(prev => [...prev, coffee]);
+      setCart(prev => {
+        const newState = [...prev, coffee];
+
+        localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify(newState));
+
+        return newState;
+      });
     }
   }
 
   function updateCartItem(id: number, quantity: number) {
     setCart(prev => {
-      return prev.map(item => {
+      const newState = prev.map(item => {
         if (item.id === id) {
           return {
             ...item,
@@ -73,11 +87,21 @@ export function CartProvider({ children }: CartProviderProps) {
         }
         return item;
       });
+
+      localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify(newState));
+
+      return newState;
     })
   }
 
   function removeCartItem(id: number) {
-    setCart(prev => prev.filter(item => item.id !== id));
+    setCart(prev => {
+      const newState = prev.filter(item => item.id !== id);
+
+      localStorage.setItem('@coffee-delivery:cart-1.0.0', JSON.stringify(newState));
+
+      return newState;
+    });
   }
 
   function updatePaymentType(value: PaymentType) {
