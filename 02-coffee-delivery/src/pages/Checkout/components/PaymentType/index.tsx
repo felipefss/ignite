@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { ChangeEvent, useContext, useState } from "react";
 import { CurrencyDollar } from "phosphor-react";
 
 import { CartContext } from "../../../../contexts/CartContext";
@@ -7,9 +7,11 @@ import { PaymentMethod, TypeOfPayment } from "../PaymentMethod";
 import * as Styled from './styles';
 
 export function PaymentType() {
-  const { updatePaymentType } = useContext(CartContext);
+  const { updatePaymentType, paymentType } = useContext(CartContext);
+  const [selectedOption, setSelectedOption] = useState<TypeOfPayment | null>(paymentType);
 
-  function onSelectPaymentMethod(value: TypeOfPayment) {
+  function handleSelectPaymentMethod(value: TypeOfPayment) {
+    setSelectedOption(value);
     updatePaymentType(value);
   }
 
@@ -25,9 +27,24 @@ export function PaymentType() {
       </Styled.Header>
 
       <Styled.PaymentMethods>
-        <PaymentMethod label="Cartão de Crédito" type="credit" onSelect={onSelectPaymentMethod} />
-        <PaymentMethod label="Cartão de Débito" type="debit" onSelect={onSelectPaymentMethod} />
-        <PaymentMethod label="Dinheiro" type="cash" onSelect={onSelectPaymentMethod} />
+        <PaymentMethod
+          label="Cartão de Crédito"
+          type="credit"
+          checked={selectedOption === 'credit'}
+          onChange={(e) => handleSelectPaymentMethod(e.target.value as TypeOfPayment)}
+        />
+        <PaymentMethod
+          label="Cartão de Débito"
+          type="debit"
+          checked={selectedOption === 'debit'}
+          onChange={(e) => handleSelectPaymentMethod(e.target.value as TypeOfPayment)}
+        />
+        <PaymentMethod
+          label="Dinheiro"
+          type="cash"
+          checked={selectedOption === 'cash'}
+          onChange={(e) => handleSelectPaymentMethod(e.target.value as TypeOfPayment)}
+        />
       </Styled.PaymentMethods>
     </Styled.PaymentContainer>
   );

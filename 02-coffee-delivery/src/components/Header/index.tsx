@@ -1,6 +1,6 @@
 import { MapPin, ShoppingCart } from 'phosphor-react';
 import { ReactNode, useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { CartContext } from '../../contexts/CartContext';
 import { Button } from '../Button';
 import * as Styled from './styles';
@@ -10,9 +10,10 @@ interface ConditionalLinkProps {
 }
 
 export function Header() {
-  const { cart } = useContext(CartContext);
+  const { cart, clearCheckout } = useContext(CartContext);
+  const location = useLocation();
 
-  const ConditionalLink = ({ children }: ConditionalLinkProps) => {
+  function ConditionalLink({ children }: ConditionalLinkProps) {
     if (cart.length) {
       return <Link to='/checkout'>{children}</Link>;
     }
@@ -20,9 +21,15 @@ export function Header() {
     return <>{children}</>
   };
 
+  function handleGoToHome() {
+    if (location.pathname === '/success') {
+      clearCheckout();
+    }
+  }
+
   return (
     <Styled.HeaderContainer>
-      <Link to='/'>
+      <Link to='/' onClick={handleGoToHome}>
         <img src='assets/Logo.svg' alt="Copo take-out de café escrito Coffee Delivery ao lado" />
       </Link>
       <Styled.ActionButtons>

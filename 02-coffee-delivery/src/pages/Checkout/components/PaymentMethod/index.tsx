@@ -1,19 +1,19 @@
 import { Bank, CreditCard, Money } from 'phosphor-react';
+import { ChangeEvent, InputHTMLAttributes } from 'react';
 import * as Styled from './styles';
 
 export type TypeOfPayment = 'credit' | 'debit' | 'cash';
 
-interface PaymentMethodProps {
+interface PaymentMethodProps extends InputHTMLAttributes<HTMLInputElement> {
   label: string;
   type: TypeOfPayment;
-  onSelect: (value: TypeOfPayment) => void;
 }
 
 interface IconProps {
   paymentType: TypeOfPayment;
 }
 
-export function PaymentMethod({ label, type, onSelect }: PaymentMethodProps) {
+export function PaymentMethod({ label, type, ...props }: PaymentMethodProps) {
   const icon = {
     credit: <CreditCard size={16} />,
     debit: <Bank size={16} />,
@@ -28,7 +28,7 @@ export function PaymentMethod({ label, type, onSelect }: PaymentMethodProps) {
         type="radio"
         name="paymentMethod"
         value={type}
-        onChange={(e) => onSelect(e.target.value as TypeOfPayment)}
+        {...props}
       />
       <Icon paymentType={type} />
       <span>{label}</span>

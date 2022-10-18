@@ -25,12 +25,13 @@ export interface DeliveryAddress {
 interface ICartContext {
   cart: Coffee[];
   deliveryDetails: DeliveryAddress;
-  paymentType?: PaymentType | null;
+  paymentType: PaymentType | null;
   addToCart: (coffee: Coffee) => void;
   updateCartItem: (id: number, quantity: number) => void;
   removeCartItem: (id: number) => void;
   updatePaymentType: (value: PaymentType) => void;
   updateDeliveryAddress: (key: keyof DeliveryAddress, value: string) => void;
+  clearCart: () => void;
   clearCheckout: () => void;
 }
 
@@ -50,7 +51,7 @@ export const CartContext = createContext({} as ICartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
   const [cart, setCart] = useState<Coffee[]>([]);
-  const [paymentType, setPaymentType] = useState<PaymentType>();
+  const [paymentType, setPaymentType] = useState<PaymentType | null>(null);
   const [deliveryDetails, setDeliveryDetails] = useState(emptyDeliveryDetails);
 
   function addToCart(coffee: Coffee) {
@@ -88,8 +89,12 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function clearCheckout() {
-    setCart([]);
     setDeliveryDetails(emptyDeliveryDetails);
+    setPaymentType(null);
+  }
+
+  function clearCart() {
+    setCart([]);
   }
 
   return (
@@ -102,6 +107,7 @@ export function CartProvider({ children }: CartProviderProps) {
       removeCartItem,
       updatePaymentType,
       updateDeliveryAddress,
+      clearCart,
       clearCheckout
     }}>
       {children}
