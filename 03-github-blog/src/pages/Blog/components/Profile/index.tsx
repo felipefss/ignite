@@ -6,7 +6,7 @@ import * as Styled from './styles';
 export function Profile() {
   return (
     <Styled.Container>
-      <Styled.Image src="https://via.placeholder.com/148" alt="" />
+      <Styled.Image src="https://via.placeholder.com/148" alt="User photo" />
 
       <Styled.Info>
         <Styled.Header>
