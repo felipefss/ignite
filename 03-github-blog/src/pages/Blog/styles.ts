@@ -44,3 +44,11 @@ export const SearchInput = styled.input`
     outline: solid ${(props) => props.theme.blue};
   }
 `;
+
+export const CardList = styled.section`
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  grid-auto-rows: 16.25rem;
+  margin: 3rem 0;
+`;
