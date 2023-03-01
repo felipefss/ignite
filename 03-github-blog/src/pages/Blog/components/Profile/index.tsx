@@ -1,36 +1,35 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUpRightFromSquare, faBuilding, faUserGroup } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useGetUser } from '../../hooks/useGetUser';
 import * as Styled from './styles';
 
 export function Profile() {
+  const { avatarUrl, bio, company, followers, name, profileUrl, userName } = useGetUser();
+
   return (
     <Styled.Container>
-      <Styled.Image src="https://via.placeholder.com/148" alt="User photo" />
+      <Styled.Image src={avatarUrl} alt="User photo" />
 
       <Styled.Info>
         <Styled.Header>
-          <Styled.Title>Cameron Williamson</Styled.Title>
-          <Styled.Link href="http://github.com" target="_blank" rel="noopener noreferrer">
+          <Styled.Title>{name}</Styled.Title>
+          <Styled.Link href={profileUrl} target="_blank" rel="noopener noreferrer">
             Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </Styled.Link>
         </Styled.Header>
 
-        <Styled.BodyText>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Qui asperiores nobis quis voluptas. Reiciendis,
-          magnam. Sunt, ipsa quam natus possimus eum officiis praesentium repellendus quibusdam perspiciatis, veritatis
-          nobis! Sunt, temporibus.
-        </Styled.BodyText>
+        <Styled.BodyText>{bio || 'No bio'}</Styled.BodyText>
 
         <Styled.Footer>
           <span>
-            <FontAwesomeIcon icon={faGithub} /> username
+            <FontAwesomeIcon icon={faGithub} /> {userName}
           </span>
           <span>
-            <FontAwesomeIcon icon={faBuilding} /> company
+            <FontAwesomeIcon icon={faBuilding} /> {company}
           </span>
           <span>
-            <FontAwesomeIcon icon={faUserGroup} /> 32 seguidores
+            <FontAwesomeIcon icon={faUserGroup} /> {followers} seguidores
           </span>
         </Styled.Footer>
       </Styled.Info>

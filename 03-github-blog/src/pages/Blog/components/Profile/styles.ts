@@ -22,6 +22,7 @@ export const Image = styled.img`
 export const Info = styled.section`
   display: flex;
   flex-direction: column;
+  width: 100%;
 `;
 
 export const Header = styled.header`
