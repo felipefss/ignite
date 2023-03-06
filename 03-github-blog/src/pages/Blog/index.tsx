@@ -1,3 +1,4 @@
+import { FormEvent, useRef, useState } from 'react';
 import { Card } from './components/Card';
 import { Profile } from './components/Profile';
 import { useSearchPost } from './hooks/useSearchPost';
@@ -5,8 +6,16 @@ import { useSearchPost } from './hooks/useSearchPost';
 import * as Styled from './styles';
 
 export function Blog() {
-  const posts = useSearchPost();
-  console.log(posts);
+  const [searchInput, setSearchInput] = useState('');
+  const searchInputRef = useRef<HTMLInputElement>(null);
+
+  const posts = useSearchPost(searchInput);
+
+  function handleSubmit(e: FormEvent) {
+    e.preventDefault();
+
+    setSearchInput(searchInputRef.current?.value ?? '');
+  }
 
   return (
     <Styled.Container>
@@ -17,8 +26,8 @@ export function Blog() {
         <Styled.Counter>{posts.length} publicações</Styled.Counter>
       </Styled.CounterContainer>
 
-      <form action="#">
-        <Styled.SearchInput type="text" placeholder="Buscar conteúdo" />
+      <form onSubmit={handleSubmit}>
+        <Styled.SearchInput ref={searchInputRef} type="text" placeholder="Buscar conteúdo" />
       </form>
 
       <Styled.CardList>

@@ -19,7 +19,7 @@ interface QueryResult {
   items: PostQuery[];
 }
 
-export function useSearchPost(input?: string) {
+export function useSearchPost(input?: string): Post[] {
   const [posts, setPosts] = useState<Post[]>([]);
 
   useEffect(() => {
@@ -40,7 +40,7 @@ export function useSearchPost(input?: string) {
     }
 
     fetchPosts();
-  }, []);
+  }, [input]);
 
   return posts;
 }
