@@ -12,11 +12,15 @@ export const Header = styled.header`
   gap: 2rem;
   margin-bottom: 1.25rem;
 
+  a {
+    text-decoration: none;
+    flex: 1;
+  }
+
   h3 {
     font-size: 1.25rem;
     font-weight: 700;
     color: ${(props) => props.theme.title};
-    flex: 1;
   }
 
   span {
