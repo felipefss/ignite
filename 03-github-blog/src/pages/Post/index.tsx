@@ -1,49 +1,49 @@
 import { faGithub } from '@fortawesome/free-brands-svg-icons';
 import { faArrowUpRightFromSquare, faCalendarDay, faChevronLeft, faComment } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useLoaderData } from 'react-router-dom';
 import * as Styled from './styles';
 
+import { Post as PostModel } from '../../models/Post';
+import { formatDuration } from '../../utils/date';
+import { ReactMarkdown } from 'react-markdown/lib/react-markdown';
+
 export function Post() {
+  const { body, comments, createdAt, title, userName, url } = useLoaderData() as PostModel;
+
   return (
     <Styled.Container>
       <Styled.PostInfo>
         <Styled.PostInfoActions>
-          <Styled.Link to="#">
+          <Styled.Link to="/">
             <FontAwesomeIcon icon={faChevronLeft} />
             Voltar
           </Styled.Link>
-          <Styled.Link to="#" reloadDocument>
+          <Styled.Link to={url} target="_blank">
             Ver no Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </Styled.Link>
         </Styled.PostInfoActions>
 
-        <Styled.PostInfoTitle>Javascript data types and data structure</Styled.PostInfoTitle>
+        <Styled.PostInfoTitle>{title}</Styled.PostInfoTitle>
 
         <Styled.PostInfoFooter>
           <span>
             <FontAwesomeIcon icon={faGithub} />
-            username
+            {userName}
           </span>
           <span>
             <FontAwesomeIcon icon={faCalendarDay} />
-            Há 1 dia
+            {formatDuration(createdAt)}
           </span>
           <span>
-            <FontAwesomeIcon icon={faComment} />5 comentários
+            <FontAwesomeIcon icon={faComment} />
+            {comments} comentários
           </span>
         </Styled.PostInfoFooter>
       </Styled.PostInfo>
 
       <Styled.Body>
-        <div>
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Unde neque porro accusantium quidem quis? Harum
-          velit provident id voluptatibus vero nihil voluptatum, voluptates magni adipisci quibusdam quisquam dolore
-          mollitia minus. Lorem ipsum dolor sit amet consectetur adipisicing elit. Quis, omnis atque? Necessitatibus,
-          assumenda! Aliquid facilis nulla odio saepe provident asperiores deleniti voluptate? Suscipit, fugit.
-          Assumenda itaque consequuntur ratione corrupti aliquam. Lorem ipsum dolor sit amet consectetur adipisicing
-          elit. Consequatur dolor eos magnam sint illum, id, fugit ducimus hic obcaecati officiis eum dicta reiciendis
-          enim placeat et? Vitae reprehenderit tempora quod.
-        </div>
+        <ReactMarkdown>{body}</ReactMarkdown>
       </Styled.Body>
     </Styled.Container>
   );

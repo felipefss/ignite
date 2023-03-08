@@ -14,7 +14,7 @@ export function Profile() {
       <Styled.Info>
         <Styled.Header>
           <Styled.Title>{name}</Styled.Title>
-          <Styled.Link href={profileUrl} target="_blank" rel="noopener noreferrer">
+          <Styled.Link href={profileUrl} target="_blank">
             Github <FontAwesomeIcon icon={faArrowUpRightFromSquare} />
           </Styled.Link>
         </Styled.Header>
