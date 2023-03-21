@@ -43,17 +43,6 @@ export const Product = styled('div', {
     transform: 'translateY(110%)',
     opacity: 0,
     transition: 'all 0.2s ease-in-out',
-
-    strong: {
-      fontSize: '$lg',
-      color: '$gray100',
-    },
-
-    span: {
-      fontSize: '$xl',
-      fontWeight: 'bold',
-      color: '$green300',
-    },
   },
 
   '&:hover': {
@@ -61,5 +50,34 @@ export const Product = styled('div', {
       transform: 'translateY(0%)',
       opacity: 1,
     },
+  },
+});
+
+export const ProductInfo = styled('div', {
+  display: 'flex',
+  flexDirection: 'column',
+
+  strong: {
+    fontSize: '$lg',
+    color: '$gray100',
+  },
+
+  span: {
+    fontSize: '$xl',
+    fontWeight: 'bold',
+    color: '$green300',
+  },
+});
+
+export const CartButton = styled('button', {
+  backgroundColor: '$green500',
+  color: '$white',
+  padding: '0.75rem',
+  border: 'none',
+  borderRadius: 6,
+  cursor: 'pointer',
+
+  '&:hover': {
+    backgroundColor: '$green300',
   },
 });
