@@ -21,4 +21,18 @@ export const { config, styled, css, globalCss, keyframes, getCssText, theme, cre
       '2xl': '2rem',
     },
   },
+
+  utils: {
+    pseudoContent: (value: { empty: boolean; val: string }) => {
+      if (value.empty === false) {
+        return {
+          '&::after': {
+            content: `${value.val ?? ''}`,
+          },
+        };
+      }
+
+      return {};
+    },
+  },
 });
