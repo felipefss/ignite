@@ -1,4 +1,5 @@
 import { Cart } from '@/components/Cart';
+import { CartButton } from '@/components/CartButton';
 import { globalStyles } from '@/styles/global';
 import { Container, Header } from '@/styles/pages/app';
 import type { AppProps } from 'next/app';
@@ -13,8 +14,10 @@ export default function App({ Component, pageProps }: AppProps) {
     <Container>
       <Header>
         <Image src={logoImg.src} width={130} height={52} alt="" />
-        <Cart />
+        <CartButton />
       </Header>
+
+      <Cart />
 
       <Component {...pageProps} />
     </Container>
