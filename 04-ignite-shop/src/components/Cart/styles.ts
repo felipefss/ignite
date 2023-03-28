@@ -21,6 +21,7 @@ export const DialogClose = styled(Dialog.Close, {
   alignSelf: 'flex-end',
   margin: '1.5rem',
   color: '#8D8D99',
+  cursor: 'pointer',
 });
 
 export const Body = styled('div', {
