@@ -20,6 +20,7 @@ export const Title = styled(Dialog.Title, {});
 export const DialogClose = styled(Dialog.Close, {
   alignSelf: 'flex-end',
   margin: '1.5rem',
+  color: '#8D8D99',
 });
 
 export const Body = styled('div', {

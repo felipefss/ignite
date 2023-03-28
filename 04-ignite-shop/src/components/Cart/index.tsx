@@ -13,7 +13,7 @@ import {
   Title,
 } from './styles';
 
-import shirt from '../../assets/Shirt.png';
+import { CartItem } from './components/CartItem';
 
 export function Cart() {
   return (
@@ -27,15 +27,9 @@ export function Cart() {
 
           <Body>
             <Title>Sacola de compras</Title>
-            <div>
-              <Image src={shirt} width={95} height={95} alt="camiseta" />
-
-              <div>
-                <span>Camiseta Beyond the Limits</span>
-                <span>R$ 79,90</span>
-                <button>Remover</button>
-              </div>
-            </div>
+            <CartItem />
+            <CartItem />
+            <CartItem />
           </Body>
 
           <Footer>
