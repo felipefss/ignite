@@ -10,9 +10,11 @@ interface Product {
 
 interface CartContext {
   products: Product[];
-  addToCart: (item: Product) => void;
+  addToCart: (item: Omit<Product, 'quantity'>) => void;
   removeFromCart: (id: string) => void;
   updateItemQuantity: (id: string, step: number) => void;
+  toggleCartVisibility: () => void;
+  isCartVisible: boolean;
 }
 
 interface CartProviderProps {
@@ -23,9 +25,16 @@ const CartContext = createContext({} as CartContext);
 
 export function CartProvider({ children }: CartProviderProps) {
   const [products, setProducts] = useState<Product[]>([]);
+  const [isCartVisible, setIsCartVisible] = useState(false);
 
-  function addToCart(item: Product) {
-    setProducts((prev) => [...prev, item]);
+  function addToCart(item: Omit<Product, 'quantity'>) {
+    const product = products.find((product) => product.id === item.id);
+
+    if (!product) {
+      setProducts((prev) => [...prev, { ...item, quantity: 1 }]);
+    } else {
+      updateItemQuantity(item.id, 1);
+    }
   }
 
   function removeFromCart(id: string) {
@@ -49,6 +58,10 @@ export function CartProvider({ children }: CartProviderProps) {
     );
   }
 
+  function toggleCartVisibility() {
+    setIsCartVisible((prev) => !prev);
+  }
+
   return (
     <CartContext.Provider
       value={{
@@ -56,6 +69,8 @@ export function CartProvider({ children }: CartProviderProps) {
         addToCart,
         removeFromCart,
         updateItemQuantity,
+        toggleCartVisibility,
+        isCartVisible,
       }}
     >
       {children}

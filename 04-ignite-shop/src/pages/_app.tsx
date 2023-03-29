@@ -1,5 +1,6 @@
 import { Cart } from '@/components/Cart';
 import { CartButton } from '@/components/CartButton';
+import { CartProvider } from '@/contexts/CartContext';
 import { globalStyles } from '@/styles/global';
 import { Container, Header } from '@/styles/pages/app';
 import type { AppProps } from 'next/app';
@@ -12,14 +13,16 @@ globalStyles();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <Container>
-      <Header>
-        <Image src={logoImg.src} width={130} height={52} alt="" />
-        <CartButton />
-      </Header>
+      <CartProvider>
+        <Header>
+          <Image src={logoImg.src} width={130} height={52} alt="" />
+          <CartButton />
+        </Header>
 
-      <Cart />
+        <Cart />
 
-      <Component {...pageProps} />
+        <Component {...pageProps} />
+      </CartProvider>
     </Container>
   );
 }

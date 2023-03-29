@@ -4,30 +4,41 @@ import { stripe } from '@/lib/stripe';
 import { GetStaticProps } from 'next';
 import Stripe from 'stripe';
 import Link from 'next/link';
-import { useState } from 'react';
+import { MouseEvent, useState } from 'react';
 import { useKeenSlider } from 'keen-slider/react';
-
-import { CartButton, HomeContainer, Product, ProductInfo } from './home';
-
-import 'keen-slider/keen-slider.min.css';
 import { Handbag } from 'phosphor-react';
 
+import { CartButton, HomeContainer, Product, ProductInfo } from './home';
+import { useCartContext } from '@/contexts/CartContext';
+
+import 'keen-slider/keen-slider.min.css';
+
+interface Product {
+  id: string;
+  name: string;
+  imageUrl: string;
+  price: string;
+}
+
 interface HomeProps {
-  products: {
-    id: string;
-    name: string;
-    imageUrl: string;
-    price: string;
-  }[];
+  products: Product[];
 }
 
 export default function Home({ products }: HomeProps) {
+  const { addToCart } = useCartContext();
+
   const [sliderRef] = useKeenSlider({
     slides: {
       perView: 3,
       spacing: 48,
     },
   });
+
+  function handleAddToCart(e: MouseEvent, item: Product) {
+    e.preventDefault();
+
+    addToCart(item);
+  }
 
   return (
     <>
@@ -47,7 +58,7 @@ export default function Home({ products }: HomeProps) {
                   <span>{product.price}</span>
                 </ProductInfo>
 
-                <CartButton type="button">
+                <CartButton type="button" onClick={(e) => handleAddToCart(e, product)}>
                   <Handbag size={28} weight="bold" />
                 </CartButton>
               </footer>

@@ -1,12 +1,13 @@
-import { stripe } from '@/lib/stripe';
-import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
-import axios from 'axios';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import Head from 'next/head';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useState } from 'react';
 import Stripe from 'stripe';
+
+import { stripe } from '@/lib/stripe';
+import { useCartContext } from '@/contexts/CartContext';
+
+import { ImageContainer, ProductContainer, ProductDetails } from '@/styles/pages/product';
 
 interface ProductProps {
   product: {
@@ -20,28 +21,34 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+  // const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
   const { isFallback } = useRouter();
+  const { toggleCartVisibility, addToCart } = useCartContext();
 
   if (isFallback) {
     return <p>Loading...</p>;
   }
 
-  async function handleBuyProduct() {
-    try {
-      setIsCreatingCheckoutSession(true);
+  // async function handleBuyProduct() {
+  //   try {
+  //     setIsCreatingCheckoutSession(true);
 
-      const response = await axios.post('/api/checkout', {
-        priceId: product.defaultPriceId,
-      });
+  //     const response = await axios.post('/api/checkout', {
+  //       priceId: product.defaultPriceId,
+  //     });
 
-      const { checkoutUrl } = response.data;
-      window.location.href = checkoutUrl;
-    } catch (err) {
-      setIsCreatingCheckoutSession(false);
-      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry / Mend)
-      alert('Falha ao redirecionar ao checkout!');
-    }
+  //     const { checkoutUrl } = response.data;
+  //     window.location.href = checkoutUrl;
+  //   } catch (err) {
+  //     setIsCreatingCheckoutSession(false);
+  //     // Conectar com uma ferramenta de observabilidade (Datadog / Sentry / Mend)
+  //     alert('Falha ao redirecionar ao checkout!');
+  //   }
+  // }
+
+  function handleAddToCart() {
+    addToCart(product);
+    toggleCartVisibility();
   }
 
   return (
@@ -59,9 +66,7 @@ export default function Product({ product }: ProductProps) {
 
           <p>{product.description}</p>
 
-          <button onClick={handleBuyProduct} disabled={isCreatingCheckoutSession}>
-            Colocar na sacola
-          </button>
+          <button onClick={handleAddToCart}>Colocar na sacola</button>
         </ProductDetails>
       </ProductContainer>
     </>
