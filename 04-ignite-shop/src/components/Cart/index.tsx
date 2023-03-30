@@ -1,6 +1,6 @@
 import * as Dialog from '@radix-ui/react-dialog';
-import Image from 'next/image';
 import { X } from 'phosphor-react';
+
 import {
   Body,
   CartContent,
@@ -14,34 +14,49 @@ import {
 } from './styles';
 
 import { CartItem } from './components/CartItem';
+import { useCartContext } from '@/contexts/CartContext';
+import { priceFormat } from '@/utils/priceFormat';
 
 export function Cart() {
+  const { products, isCartVisible, toggleCartVisibility } = useCartContext();
+
+  const cartSize = products.length;
+  const totalPrice = products.reduce((sum, item) => sum + item.price, 0);
+
   return (
-    <Dialog.Root open>
+    <Dialog.Root open={isCartVisible}>
       <Dialog.Portal>
         <Dialog.Overlay />
         <CartContent>
-          <DialogClose asChild>
+          <DialogClose asChild onClick={toggleCartVisibility}>
             <X size={24} weight="bold" />
           </DialogClose>
 
           <Body>
             <Title>Sacola de compras</Title>
-            <CartItem />
-            <CartItem />
-            <CartItem />
+            {products.map((product) => (
+              <CartItem
+                key={product.id}
+                id={product.id}
+                imageUrl={product.imageUrl}
+                name={product.name}
+                price={product.price}
+              />
+            ))}
           </Body>
 
           <Footer>
             <CheckoutInfo>
               <CartQuantity>
                 <span>Quantidade</span>
-                <span>3 itens</span>
+                <span>
+                  {cartSize} ite{cartSize > 1 ? 'ns' : 'm'}
+                </span>
               </CartQuantity>
 
               <CartTotal>
                 <span>Valor total</span>
-                <span>R$ 270,00</span>
+                <span>{priceFormat(totalPrice)}</span>
               </CartTotal>
             </CheckoutInfo>
 

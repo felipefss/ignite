@@ -1,10 +1,10 @@
-import { createContext, useContext, useState, type ReactNode } from 'react';
+import { createContext, useContext, useState, ReactNode } from 'react';
 
 interface Product {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
   quantity: number;
 }
 
@@ -28,9 +28,9 @@ export function CartProvider({ children }: CartProviderProps) {
   const [isCartVisible, setIsCartVisible] = useState(false);
 
   function addToCart(item: Omit<Product, 'quantity'>) {
-    const product = products.find((product) => product.id === item.id);
+    const index = products.findIndex((product) => product.id === item.id);
 
-    if (!product) {
+    if (index === -1) {
       setProducts((prev) => [...prev, { ...item, quantity: 1 }]);
     } else {
       updateItemQuantity(item.id, 1);
@@ -38,7 +38,15 @@ export function CartProvider({ children }: CartProviderProps) {
   }
 
   function removeFromCart(id: string) {
-    setProducts((prev) => prev.filter((item) => item.id !== id));
+    setProducts((prev) => {
+      const newValue = prev.filter((item) => item.id !== id);
+
+      if (newValue.length === 0) {
+        setIsCartVisible(false);
+      }
+
+      return newValue;
+    });
   }
 
   function updateItemQuantity(id: string, step: number) {

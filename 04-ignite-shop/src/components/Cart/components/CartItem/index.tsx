@@ -1,19 +1,35 @@
+import { useCartContext } from '@/contexts/CartContext';
+import { priceFormat } from '@/utils/priceFormat';
 import Image from 'next/image';
 
-import shirt from '../../../../assets/Shirt.png';
 import { ImageContainer, ItemContainer, ItemDetails } from './styles';
 
-export function CartItem() {
+interface Props {
+  id: string;
+  name: string;
+  price: number;
+  imageUrl: string;
+}
+
+export function CartItem({ id, imageUrl, name, price }: Props) {
+  const { removeFromCart } = useCartContext();
+
+  function handleRemove() {
+    removeFromCart(id);
+  }
+
   return (
     <ItemContainer>
       <ImageContainer>
-        <Image src={shirt} width={95} height={95} alt="camiseta" />
+        <Image src={imageUrl} width={95} height={95} alt="camiseta" />
       </ImageContainer>
 
       <ItemDetails>
-        <span>Camiseta Beyond the Limits</span>
-        <span>R$ 79,90</span>
-        <button>Remover</button>
+        <span>{name}</span>
+        <span>{priceFormat(price)}</span>
+        <button type="button" onClick={handleRemove}>
+          Remover
+        </button>
       </ItemDetails>
     </ItemContainer>
   );

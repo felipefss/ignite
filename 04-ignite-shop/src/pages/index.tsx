@@ -12,12 +12,13 @@ import { CartButton, HomeContainer, Product, ProductInfo } from './home';
 import { useCartContext } from '@/contexts/CartContext';
 
 import 'keen-slider/keen-slider.min.css';
+import { priceFormat } from '@/utils/priceFormat';
 
 interface Product {
   id: string;
   name: string;
   imageUrl: string;
-  price: string;
+  price: number;
 }
 
 interface HomeProps {
@@ -55,7 +56,7 @@ export default function Home({ products }: HomeProps) {
               <footer>
                 <ProductInfo>
                   <strong>{product.name}</strong>
-                  <span>{product.price}</span>
+                  <span>{priceFormat(product.price)}</span>
                 </ProductInfo>
 
                 <CartButton type="button" onClick={(e) => handleAddToCart(e, product)}>
@@ -82,10 +83,7 @@ export const getStaticProps: GetStaticProps = async () => {
       id: product.id,
       name: product.name,
       imageUrl: product.images[0],
-      price: new Intl.NumberFormat('pt-BR', {
-        style: 'currency',
-        currency: 'BRL',
-      }).format((price.unit_amount ?? 0) / 100),
+      price: price.unit_amount,
     };
   });
 
