@@ -16,12 +16,33 @@ import {
 import { CartItem } from './components/CartItem';
 import { useCartContext } from '@/contexts/CartContext';
 import { priceFormat } from '@/utils/priceFormat';
+import { useState } from 'react';
+import axios from 'axios';
 
 export function Cart() {
+  const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
+
   const { products, isCartVisible, toggleCartVisibility } = useCartContext();
 
   const cartSize = products.length;
   const totalPrice = products.reduce((sum, item) => sum + item.price, 0);
+
+  async function handleBuyProduct() {
+    try {
+      setIsCreatingCheckoutSession(true);
+
+      const response = await axios.post('/api/checkout', {
+        products,
+      });
+
+      const { checkoutUrl } = response.data;
+      window.location.href = checkoutUrl;
+    } catch (err) {
+      setIsCreatingCheckoutSession(false);
+      // Conectar com uma ferramenta de observabilidade (Datadog / Sentry / Mend)
+      alert('Falha ao redirecionar ao checkout!');
+    }
+  }
 
   return (
     <Dialog.Root open={isCartVisible}>
@@ -60,7 +81,9 @@ export function Cart() {
               </CartTotal>
             </CheckoutInfo>
 
-            <PurchaseButton>Finalizar compra</PurchaseButton>
+            <PurchaseButton type="button" onClick={handleBuyProduct}>
+              Finalizar compra
+            </PurchaseButton>
           </Footer>
         </CartContent>
       </Dialog.Portal>

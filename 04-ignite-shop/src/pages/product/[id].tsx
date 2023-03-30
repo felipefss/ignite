@@ -22,30 +22,12 @@ interface ProductProps {
 }
 
 export default function Product({ product }: ProductProps) {
-  // const [isCreatingCheckoutSession, setIsCreatingCheckoutSession] = useState(false);
   const { isFallback } = useRouter();
   const { toggleCartVisibility, addToCart } = useCartContext();
 
   if (isFallback) {
     return <p>Loading...</p>;
   }
-
-  // async function handleBuyProduct() {
-  //   try {
-  //     setIsCreatingCheckoutSession(true);
-
-  //     const response = await axios.post('/api/checkout', {
-  //       priceId: product.defaultPriceId,
-  //     });
-
-  //     const { checkoutUrl } = response.data;
-  //     window.location.href = checkoutUrl;
-  //   } catch (err) {
-  //     setIsCreatingCheckoutSession(false);
-  //     // Conectar com uma ferramenta de observabilidade (Datadog / Sentry / Mend)
-  //     alert('Falha ao redirecionar ao checkout!');
-  //   }
-  // }
 
   function handleAddToCart() {
     addToCart(product);
