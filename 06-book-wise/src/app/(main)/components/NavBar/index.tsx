@@ -15,7 +15,7 @@ export default function NavBar() {
         <Styled.MenuItem>
           <ChartLineUp /> Inicio
         </Styled.MenuItem>
-        <Styled.MenuItem isSelected>
+        <Styled.MenuItem isSelected={true}>
           <Binoculars /> Explorar
         </Styled.MenuItem>
       </Styled.Menu>
