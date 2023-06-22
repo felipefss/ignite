@@ -24,7 +24,7 @@ export const Menu = styled.div`
 `;
 
 interface MenuItemProps {
-  isSelected?: boolean;
+  $isSelected?: boolean;
 }
 
 export const MenuItem = styled.button<MenuItemProps>`
@@ -37,8 +37,8 @@ export const MenuItem = styled.button<MenuItemProps>`
     color: var(--gray-100);
   }
 
-  ${({ isSelected }) =>
-    isSelected &&
+  ${({ $isSelected }) =>
+    $isSelected &&
     css`
       color: var(--gray-100);
       font-weight: 700;
