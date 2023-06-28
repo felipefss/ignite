@@ -41,3 +41,22 @@ export const PopularBooks = styled.aside`
   gap: 1rem;
   width: 324px;
 `;
+
+export const PopularBooksHead = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  a {
+    all: unset;
+
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 1.6;
+    color: var(--purple-100);
+    cursor: pointer;
+  }
+`;

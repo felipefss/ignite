@@ -50,6 +50,8 @@ export const Title = styled.div`
 `;
 
 export const Rating = styled.div`
+  display: flex;
+  gap: 0.25rem;
   color: var(--purple-100);
 `;
 

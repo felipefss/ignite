@@ -1,14 +1,7 @@
 import * as Styled from './styles';
 
-import BookCard from '../BookCard';
+import { ReactNode } from 'react';
 
-export default function BookList() {
-  return (
-    <Styled.Container>
-      <BookCard />
-      <BookCard />
-      <BookCard />
-      <BookCard />
-    </Styled.Container>
-  );
+export default function BookList({ children }: { children: ReactNode }) {
+  return <Styled.Container>{children}</Styled.Container>;
 }
