@@ -4,8 +4,13 @@ export const Container = styled.article`
   height: 280px;
   background-color: var(--gray-700);
   padding: 1.5rem;
+  border: 2px solid transparent;
   border-radius: 8px;
   overflow-y: hidden;
+
+  &:hover {
+    border: 2px solid var(--gray-500);
+  }
 `;
 
 export const Header = styled.header`
@@ -17,21 +22,6 @@ export const UserInfo = styled.div`
   display: flex;
   align-items: center;
   gap: 1rem;
-`;
-
-export const Avatar = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  max-width: 42px;
-  background: var(--gradient-vertical);
-  padding: 1px;
-  border-radius: 999px;
-
-  img {
-    border-radius: 999px;
-  }
 `;
 
 export const Title = styled.div`

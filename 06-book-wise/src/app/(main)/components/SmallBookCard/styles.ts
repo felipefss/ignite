@@ -6,7 +6,12 @@ export const Container = styled.div`
 
   padding: 1rem 1.25rem;
   background-color: var(--gray-700);
+  border: 2px solid transparent;
   border-radius: 8px;
+
+  &:hover {
+    border: 2px solid var(--gray-600);
+  }
 `;
 
 export const Content = styled.div`

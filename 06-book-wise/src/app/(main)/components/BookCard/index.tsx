@@ -3,15 +3,14 @@ import * as Styled from './styles';
 
 import bookImg from '@/images/books/Book.png';
 import { Star } from 'phosphor-react';
+import Avatar from '../Avatar';
 
 export default function BookCard() {
   return (
     <Styled.Container>
       <Styled.Header>
         <Styled.UserInfo>
-          <Styled.Avatar>
-            <Image src="https://github.com/felipefss.png" alt="" width={40} height={40} />
-          </Styled.Avatar>
+          <Avatar size={40} />
 
           <Styled.Title>
             <h1>Jaxson Dias</h1>
