@@ -55,7 +55,11 @@ export const MenuItem = styled.button<MenuItemProps>`
     `}
 `;
 
-export const AuthFooter = styled.button`
+interface AuthFooterProps {
+  $isLoggedIn: boolean;
+}
+
+export const AuthFooter = styled.button<AuthFooterProps>`
   display: flex;
   align-items: center;
   gap: 0.75rem;
@@ -69,6 +73,6 @@ export const AuthFooter = styled.button`
   }
 
   svg {
-    color: var(--green-100);
+    color: ${({ $isLoggedIn }) => ($isLoggedIn ? 'var(--danger-light)' : 'var(--green-100)')};
   }
 `;
