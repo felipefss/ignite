@@ -1,14 +1,9 @@
-import { ReactNode } from 'react';
-import NavBar from './components/NavBar';
-
-// Using this inline style to keep this a server component
-const style = {
-  display: 'flex',
-};
+import { ReactNode } from "react";
+import NavBar from "./components/NavBar";
 
 export default function MainLayout({ children }: { children: ReactNode }) {
   return (
-    <div style={style}>
+    <div className="flex">
       <NavBar />
       {children}
     </div>

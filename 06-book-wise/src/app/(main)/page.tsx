@@ -1,21 +1,23 @@
-'use client';
+"use client";
 
-import { CaretRight, ChartLineUp } from 'phosphor-react';
-import * as Styled from './styles';
-import BookList from './components/BookList';
-import BookCard from './components/BookCard';
-import SmallBookCard from './components/SmallBookCard';
-import Link from 'next/link';
+import { CaretRight, ChartLineUp } from "phosphor-react";
+import BookList from "./components/BookList";
+import BookCard from "./components/BookCard";
+import SmallBookCard from "./components/SmallBookCard";
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <Styled.Container>
-      <Styled.Header>
-        <ChartLineUp /> <span>Inicio</span>
-      </Styled.Header>
+    <div className="ml-auto mr-auto mt-16">
+      <header className="flex gap-3">
+        <ChartLineUp className="text-green-100" />{" "}
+        <span className="text-2xl font-bold leading-6 text-gray-100">
+          Inicio
+        </span>
+      </header>
 
-      <Styled.Content>
-        <Styled.RecentReviews>
+      <main className="mt-10 flex gap-16">
+        <section className="flex w-[608px] flex-col gap-4">
           Avaliações mais recentes
           <BookList>
             <BookCard />
@@ -23,23 +25,27 @@ export default function Home() {
             <BookCard />
             <BookCard />
           </BookList>
-        </Styled.RecentReviews>
+        </section>
 
-        <Styled.PopularBooks>
-          <Styled.PopularBooksHead>
+        <aside className="flex w-80 flex-col gap-4">
+          <div className="flex items-center justify-between">
             <span>Livros populares</span>
-            <Link href="#">
+            <Link
+              className="flex cursor-pointer items-center gap-2 px-2 py-1 text-sm font-bold leading-6 text-purple-100 hover:rounded hover:bg-purple-100/5"
+              href="#"
+            >
               Ver todos <CaretRight />
             </Link>
-          </Styled.PopularBooksHead>
+          </div>
+
           <BookList>
             <SmallBookCard />
             <SmallBookCard />
             <SmallBookCard />
             <SmallBookCard />
           </BookList>
-        </Styled.PopularBooks>
-      </Styled.Content>
-    </Styled.Container>
+        </aside>
+      </main>
+    </div>
   );
 }
